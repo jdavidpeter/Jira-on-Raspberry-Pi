@@ -31,7 +31,7 @@ The primary bottleneck is memory. If the Jira JVM can't allocate enough heap, it
 Another question is how much this will kill your SD card as flash has finite write cycles, but I have no answer to that. I use 2 GB swap because why not, but I would recommend at least 1 GB.
 
  1. Go to /etc/dphys-swapfile with your favourite editor
- 2. Replace the relevant line by #CONF_MAXSWAP=2048
+ 2. Edit the relevant line: CONF_SWAPSIZE=2048
  3. Reboot
  4. Verify e.g. with htop that your swap is now 2G. Look for the line Swp on the top.
 
@@ -51,7 +51,7 @@ I go with my own naming scheme, but you can choose your own names.
       flush privileges;
       quit
  3. Verification:
-      mysql \--user=jirapi \--password='Mar!Pi001Mar!Pi001' \--database=jirapidb
+      mysql \--user=jirapi \--password='YourDbPasswordGoesHere' \--database=jirapidb
 
 
 #3. Deploy Jira to your Pi
@@ -65,7 +65,7 @@ In order to install Jira, we will need a working version of Java, a dedicated us
       sudo adduser jira
       Pass: YourPasswordGoesHere
       usermod -aG sudo jira
-    Switch over to new user
+    Switch over to new user (e.g., via: sudo su - jira)
 
  3. Download the tar.gz archive from https://www.atlassian.com/software/jira/download
     I was using version JIRA v7.6.2
@@ -76,9 +76,9 @@ In order to install Jira, we will need a working version of Java, a dedicated us
 
  1. Set the jira home directory by manipulating some Jira files.
       nano $JIRA_BINARIES/atlassian-jira/WEB-INF/classes/jira-application.properties
-      edit: jira.home = "~jira/jira/jira_home"
+      edit: jira.home = "/home/jira/jira_home"
       nano $JIRA_BINARIES/bin/setenv.sh
-	  edit: JIRA_HOME="~jira/jira/jira_home"
+	  edit: JIRA_HOME="/home/jira/jira_home"
  
  2. Set up ipv4 as preferred protocol. This will save a lot of hassle. If you know what you do, you can go with ipv6, although I ran to this issue:
     https://community.atlassian.com/t5/Jira-questions/Tomcat-server-unavailable-on-tcp6-IPV6/qaq-p/229018
@@ -92,7 +92,7 @@ In order to install Jira, we will need a working version of Java, a dedicated us
 #5. Start Jira and attach it to your database.
 
  1. Start jira by running $JIRA_BINARIES/bin/start-jira.sh
- 2. Connect to the web interface running on your host on the default 8080 port. You need to find out the IP of your pi first.
+ 2. Connect to the web interface running on your host on the default 8080 port. You need to find out the IP of your pi first. Usurally, running the command 'hostname -I' should display your IP.
  3. Run the setup wizard. It may crash 2-3 times, rendering your whole Pi unresponsive. Don't give up, do a reboot and run the wizard again. It will continue. Use the wizard to connect to your mysql database.
     https://confluence.atlassian.com/adminjiraserver071/running-the-setup-wizard-802592199.html
 
