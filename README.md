@@ -37,9 +37,9 @@ Another question is how much this will kill your SD card as flash has finite wri
 
 ## Overclock the Raspberry
 
-If you have a case with builtin cooling (i.e. fan + heat sink) I suggest to overclock the Raspberry to get better performance. Simply edit `/boot/config.txt`.
+If you have a case with builtin cooling (i.e. fan + heat sink) [@rationalpsyche](https://github.com/rationalpsyche/) suggests to overclock the Raspberry to get better performance. Simply edit `/boot/config.txt`.
 
-The parameters I used for **Raspberry Pi 4** are:
+The parameters used by rationalpsyche for **Raspberry Pi 4** are:
 ```
 over_voltage=6
 arm_freq=2140
@@ -124,11 +124,9 @@ In order to install Jira, we will need a working version of Java, a dedicated us
 
 ## Nice extras
 
- 1. You might want to make sure your Jira instance starts when your Pi reboots for whatever reason. There are couple of ways to achieve this, I'd recommend using `/etc/init.d`. There's an example file named jira in this repo which you should copy to `/etc/init.d/jira`. Then run the following:
+ 1. You might want to make sure your Jira instance starts when your Pi reboots for whatever reason. 
 
-    `update-rc.d jira defaults`
- 
-    In alternative you can use systemd, create `/etc/systemd/system/jira.service`
+    Create a systemd service `/etc/systemd/system/jira.service`:
 
 ```
     [Unit]
@@ -146,6 +144,10 @@ In order to install Jira, we will need a working version of Java, a dedicated us
 
 replacing the paths according to `$JIRA_BINARIES`. Then run `sudo systemctl enable jira.service`
 
+If you are not using systemd (either legacy support or personal choice) there's an example file named jira in this repo which you should copy to `/etc/init.d/jira`. Then run the following:
+
+    `update-rc.d jira defaults`
+ 
  2. In order to access the Jira from the world wide web, you either need static IP, a thing not commonly provided for residential users, or a dynamic DNS. I recommend duckdns.org, a free dynamic DNS provider. It has very straightforward setup guides both for Pi and various routers.
  
  3. Set up auto backup. If your instance has low usage, you can go with the default XML backup from Atlassian. That's not a proper tool as it might create a corrupt backup if someone is actively writing to the Jira database during the time of backup, but for a home instance, schedule it to run every night when folks sleep and be fine with it. You still need to backup file attachments manually or writing a script for that. See more in the guide:
