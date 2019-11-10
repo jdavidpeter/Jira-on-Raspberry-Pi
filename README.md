@@ -20,6 +20,10 @@ Important notice:
  - Atlassian does not provide support for Raspberry Pi, not matter what license you have or what OS you run on your Pi. If something is messed up, you can go to their community forums, but assume that you're on your own.
  - The primary bottleneck for running Jira on a Pi is memory. Make sure you use a lightweight OS and get rid of your other memory intensive apps.
 
+## Prerequisite
+
+This guide was made for a Rasberry Pi 3, running a 4.9.59-v7+ RASPBIAN STRETCH WITH DESKTOP. However, Desktop was disabled using the sudo raspi-config command, based on this guide: http://ask.xmodulo.com/disable-desktop-gui-raspberry-pi.html.
+Since we run headless, with no GUI, we need SSH to access the Pi. Follow the official guide based on your configuration: https://www.raspberrypi.org/documentation/remote-access/ssh/
 
 ## Increase swap
 
