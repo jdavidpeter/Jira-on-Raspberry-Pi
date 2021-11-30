@@ -159,3 +159,7 @@ If you are not using systemd (either legacy support or personal choice) there's 
  1. You must be aware that by default, Jira uses plain http and not https. There's a convoluted guide on Atlassian about setting up Tomcat with https (https://confluence.atlassian.com/adminjiraserver071/running-jira-applications-over-ssl-or-https-802593051.html), but I haven't tried it so far. Without https, all the data you transmit, including your user name and password is easy to capture. Should you keep http, make sure you never access the instance by an admin user from the open web, so you can lessen the damages caused by a potential intruder who stole your credentials. E.g. create a separate admin user for admin purposes only and never use that user outside your safe local network. All other users shouldn't have admin rights.
     Still, using http from the open web is very-very dangerous and you expose yourself to data theft or even worse.
  
+## Self advertisment
+
+Since this repo is already indexed by Google, let my try to advertise my other home project here hoping it will be picked up sooner or later via this link:
+https://github.com/jdavidpeter/plc-home-automation
